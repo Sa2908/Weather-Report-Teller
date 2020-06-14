@@ -1,3 +1,4 @@
+import datetime
 import requests
 import json
 import win32com.client
@@ -16,8 +17,9 @@ if __name__ == '__main__':
         print("Try Checking Your Internet Connection")
         speak("Try Checking Your Internet Connection")
         exit()
-    city_id = "XXXXXXXXX"   #Enter Your city id
-    api_key = "XXXXXXXXXXXXXXXXXXXXXXXXX"  #Enter Your Api Key you get from openweathermap.org
+    speak("Please enter Your City Id")
+    city_id = input("Please Enter Your City id\n")   #Enter Your city id
+    api_key = "7e2e1fe81de762f2f2f0177417064b65"  #Enter Your Api Key
     url = f"http://api.openweathermap.org/data/2.5/weather?id={city_id}&appid={api_key}"
     weather = requests.get(url).text
 
@@ -49,23 +51,38 @@ if __name__ == '__main__':
     sunset = sys['sunset']
     clouds = weather_dict['clouds']
     clouds_percent = clouds['all']
-
-    print(f"Your current geographic location is {lat} degree lattitude and {lon} degree longitude")
-    speak(f"Your current geographic location is {lat} degree lattitude and {lon} degree longitude")
+    f = open("oldWeatherReport.txt", "a")
+    f.write(f"DATE IS : - {datetime.datetime.now()}\n")
+    f.write(f"Your City name is {city}\n")
+    f.write(f"maximum temperature is {round((max_temp-273), 2) } celsius\n")
+    f.write(f"minimum temperature is {round((min_temp-273), 2) } degree celsius\n")
+    f.write(f"average temperature is {round((average_temp-273), 2) } degree celsius\n")
+    f.write(f"it feels like {round((feels_like-273), 2) } degree celsius\n")
+    f.write(f"humidity was {humidity} %\n")
+    f.write(f"Visibility was {visibility}\n")
+    f.write(f"Wind Speed was {speed} kilometers per hour at {deg} degrees\n")
+    f.write(f"Sunrise at {sunrise} seconds and Sunset at {sunset} seconds\n")
+    f.write(f"Clouds were {clouds_percent} percent\n")
+    f.write(f"Weather Condition was {main_type}\n\n\n")
+    f.write("_____________________________________________________________________________________________________________")
+    f.write("\n\n")
+    f.close()
+    print(f"Your current geographic location is {lat} degree North lattitude and {lon} degree East longitude")
+    speak(f"Your current geographic location is {lat} degree North lattitude and {lon} degree East longitude")
     print(f"Your City name is {city}")
     speak(f"Your City name is {city}")
     print("Weather Report for Today")
     speak("Weather Report for Today")
     print("Lets Begin Now With the weather report")
     speak("Lets Begin Now With the weather report")
-    print(f"Todays maximum temperature is {max_temp} kelvin")
-    speak(f"Todays maximum temperature is {max_temp} kelvin")
-    print(f"Todays minimum temperature is {min_temp} kelvin")
-    speak(f"Todays minimum temperature is {min_temp} kelvin")
-    print(f"Todays average temperature is {average_temp} kelvin")
-    speak(f"Todays average temperature is {average_temp} kelvin")
-    print(f"Today it feels like {feels_like} kelvin")
-    speak(f"Today it feels like {feels_like} kelvin")
+    print(f"Todays maximum temperature is {round((max_temp-273), 2) } celsius")
+    speak(f"Todays maximum temperature is {round((max_temp-273), 2) } degree celsius")
+    print(f"Todays minimum temperature is {round((min_temp-273), 2) } degree celsius")
+    speak(f"Todays minimum temperature is {round((min_temp-273), 2) } degree celsius")
+    print(f"Todays average temperature is {round((average_temp-273), 2) } degree celsius")
+    speak(f"Todays average temperature is {round((average_temp-273), 2) } degree celsius")
+    print(f"Today it feels like {round((feels_like-273), 2) } degree celsius")
+    speak(f"Today it feels like {round((feels_like-273), 2) } degree celsius")
     print(f"Todays humidity is {humidity} %")
     speak(f"Todays humidity is {humidity} percent")
     print(f"Visibility is {visibility}")
