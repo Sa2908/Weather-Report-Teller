@@ -19,7 +19,7 @@ if __name__ == '__main__':
         exit()
     speak("Please enter Your City Id")
     city_id = input("Please Enter Your City id\n")   #Enter Your city id
-    api_key = "7e2e1fe81de762f2f2f0177417064b65"  #Enter Your Api Key
+    api_key = "xxxxxxxxxxxxxxxxxxx"  #Enter Your Api Key
     url = f"http://api.openweathermap.org/data/2.5/weather?id={city_id}&appid={api_key}"
     weather = requests.get(url).text
 
